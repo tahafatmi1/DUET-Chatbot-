@@ -24,7 +24,8 @@ export function retrieve(query, limit = 3) {
 }
 
 export function retrieveScored(query, limit = 3) {
-  const tokens = tokenize(query);
+  const base = tokenize(query);
+  const tokens = [...new Set([...base, ...base.filter((t) => t.length > 3 && t.endsWith('s')).map((t) => t.slice(0, -1))])];
   const lower = query.toLowerCase();
   const scored = knowledge.entries.map((entry) => {
     let score = 0;
@@ -43,6 +44,7 @@ export function retrieveScored(query, limit = 3) {
 
 const GREETING = /^(hi|hello|hey|salam|assalam|aoa|good (morning|evening)|helo)\b/i;
 const THANKS = /\b(thanks|thank you|shukriya|jazak)/i;
+const COMPARISON = /\b(vs|versus|compare|compared|better than|which is better|best university)\b/i;
 const SENSITIVE = /\b(password|pin|otp|card number|account number|cvv)\b/i;
 
 export const FALLBACK =
@@ -62,6 +64,7 @@ export function quickReply(message) {
 
 /** Our own knowledge-base answer when the match is confident, otherwise null. */
 export function confidentKnowledgeReply(message) {
+  if (COMPARISON.test(message)) return null;
   const hits = retrieveScored(message, 2);
   if (!hits.length || hits[0].score < CONFIDENT_SCORE) return null;
   return hits.map((h) => h.entry.answer).join('\n\n');

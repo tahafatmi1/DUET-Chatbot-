@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { GraduationCap, Sparkles, ArrowDown } from 'lucide-react';
 
-const stats = [['1962', 'Founded'], ['2012', 'University status'], ['10+', 'Engineering programs'], ['24/7', 'Admission help']];
+const stats = [['1962', 'Founded'], ['60% / 50%', 'Min. Inter marks: BE / BS'], ['10·30·60', 'CPN weights (Matric·Inter·Test)'], ['24/7', 'Admission help']];
 
 export default function Hero() {
   return (

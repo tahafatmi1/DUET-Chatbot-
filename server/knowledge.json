@@ -5,14 +5,14 @@
     {
       "id": "about",
       "title": "About DUET",
-      "keywords": ["dawood", "duet", "university", "history", "founded", "kab", "kya hai", "location", "address", "campus", "karachi"],
-      "answer": "Dawood University of Engineering and Technology (DUET) is a public-sector engineering university in Karachi, on M.A. Jinnah Road. It began as Dawood College of Engineering and Technology in 1962 and was granted university status in 2012."
+      "keywords": ["about", "history", "founded", "foundation", "location", "address", "campus", "hec", "recognized", "recognised", "public", "who are you", "what is duet"],
+      "answer": "Dawood University of Engineering and Technology (DUET) is a public-sector engineering university in Karachi (M.A. Jinnah Road, Karachi-74800). It grew out of Dawood College of Engineering and Technology, whose foundations date to 1962, and was upgraded to a chartered university under a Sindh Government Act (sources give 2012/2013). It is recognised by the Higher Education Commission (HEC). Engineering degrees are four years; Architecture is five years."
     },
     {
       "id": "programs",
       "title": "Academic programs",
-      "keywords": ["program", "programs", "degree", "department", "course", "courses", "be", "bs", "engineering", "software", "civil", "electrical", "mechanical", "chemical", "petroleum", "textile", "architecture", "materials", "industrial", "telecom", "electronic", "computer", "information security", "kya parh", "subjects"],
-      "answer": "DUET offers undergraduate BE/BS/B.Arch programs in engineering and technology. Examples listed on the admissions portal include Civil, Electrical, Electronic, Mechanical, Chemical, Industrial Engineering & Management, Petroleum & Gas, Materials, Telecommunication, Software Engineering and BS Information Security Engineering. Postgraduate (MS/PhD) programs are announced separately each session. The exact list for the current session is on the admissions portal."
+      "keywords": ["program", "programs", "degree", "department", "departments", "course", "courses", "be", "bs", "engineering", "computer", "cs", "ai", "artificial", "cyber", "security", "data science", "chemical", "petroleum", "architecture", "materials", "metallurgy", "industrial", "telecom", "telecommunication", "electronic", "energy", "environment", "environmental", "mathematics", "chemistry", "information security", "kya parh", "subjects", "available", "offered"],
+      "answer": "Undergraduate programs reported for DUET include:\n- BE (Engineering): Chemical, Computer Systems, Electronic, Energy & Environment, Industrial Engineering & Management, Metallurgy & Materials, Petroleum & Gas, Telecommunication.\n- B.Arch: Architecture & Planning (5 years).\n- BS: Computer Science, Artificial Intelligence, Cyber Security / Information Security Engineering, Data Science, Mathematics, Chemistry, Environmental Science.\nThe programs open in a given session can differ, so please check the current list on the admissions portal. MS and PhD programs are announced separately."
     },
     {
       "id": "program-change",
@@ -22,71 +22,83 @@
     },
     {
       "id": "eligibility",
-      "title": "Eligibility criteria",
-      "keywords": ["eligibility", "eligible", "criteria", "requirement", "requirements", "marks", "percentage", "qualify", "intermediate", "fsc", "pre-engineering", "a level", "dae", "hsc", "ikhtiyar", "shart", "shara'it"],
-      "answer": "Typical eligibility for BE programs is intermediate (HSC Pre-Engineering) or equivalent (A-Level / DAE where recognised) with a minimum percentage, commonly around 60% for BE and around 50% for BS/B.Arch. Foreign or Cambridge/IBCC-equivalent candidates need an IBCC equivalence certificate. Minimums change each session, so please confirm in the current prospectus."
+      "title": "Eligibility criteria and minimum percentage",
+      "keywords": ["eligibility", "eligible", "criteria", "requirement", "requirements", "minimum", "percentage", "marks", "qualify", "intermediate", "inter", "fsc", "f.sc", "pre-engineering", "a level", "a-level", "dae", "hsc", "hssc", "age", "limit", "provisional", "ikhtiyar", "shart", "shara'it", "required"],
+      "answer": "Minimum marks in Intermediate (HSSC / equivalent):\n- Bachelor of Engineering (BE) programs: at least 60%.\n- Bachelor of Science (BS) programs: at least 50%.\nBE normally needs F.Sc Pre-Engineering (Physics, Chemistry, Mathematics) or an equivalent such as a relevant DAE. Candidates with foreign or A-Level qualifications need an IBCC equivalence certificate. Guides also mention an upper age limit (reported as about 25 years) and provisional applications for students awaiting results. Meeting the minimum only makes you eligible; selection is by merit (CPN)."
+    },
+    {
+      "id": "cpn",
+      "title": "CPN (merit aggregate)",
+      "keywords": ["cpn", "composite", "aggregate", "formula", "weightage", "weightage", "calculate", "calculation", "estimator", "deduction", "percentile"],
+      "answer": "Merit at DUET is based on the Composite Percentage Number (CPN). Published guides give the weights as: CPN = 10% Matric + 30% Intermediate + 60% Entry Test (for example Matric 85, Inter 75, Test 70 gives 73%). The admissions portal also mentions a deduction for results passed more than one year earlier. Try the CPN Estimator on this page, and confirm the official formula on the admissions portal."
+    },
+    {
+      "id": "merit",
+      "title": "Merit lists and closing CPN",
+      "keywords": ["merit", "merit list", "closing", "cutoff", "cut-off", "selection", "selected", "waiting", "second list", "chance", "seat", "seats", "quota", "quotas", "urban", "rural", "ajk", "domicile"],
+      "answer": "DUET publishes a first merit list, a second merit list if seats remain, and a separate self-finance list. In 2025 most programs reportedly closed between about 50% and 62% CPN (for example BS AI near 59%, BE Computer Systems near 62%, BE Electronics near 53%); these are third-party estimates and change every year. Seats include quotas such as Sindh Urban, Sindh Rural, AJK, staff children and overseas candidates, and Sindh domicile is needed for the Urban/Rural quotas."
+    },
+    {
+      "id": "test",
+      "title": "Entry test",
+      "keywords": ["test", "entry test", "exam", "paper", "syllabus", "preparation", "mcq", "appear"],
+      "answer": "Every applicant, including self-finance candidates, has to pass the DUET entry test, which carries the largest share (60%) of the CPN. I do not have a verified syllabus or paper pattern, so please check the roll number slip and the admissions portal for the date, centre and test details."
     },
     {
       "id": "apply",
       "title": "How to apply",
-      "keywords": ["apply", "application", "process", "procedure", "register", "registration", "portal", "form", "online", "steps", "kaise", "admission lena"],
-      "answer": "Application steps: 1) Register on the DUET admissions portal and create your account. 2) Fill in the online form with your academic and personal details. 3) Select your program preferences. 4) Upload the required documents and pay the application/test fee through the bank challan or the supported banking app. 5) Download your roll number slip and appear in the entry test. 6) Check the merit list and complete enrolment within the notified dates."
+      "keywords": ["apply", "application", "process", "procedure", "register", "registration", "portal", "form", "online", "steps", "kaise", "admission lena", "courier", "login"],
+      "answer": "Application steps (as described on the admissions portal):\n1) Register / log in on the DUET admissions portal.\n2) Fill in the online form with your academic and personal details and choose program preferences.\n3) Pay the application/test fee with the bank challan or supported banking app.\n4) Print the completed form and send it with the required documents and fee receipt to the Directorate of Admissions before the due date.\n5) Download your admit card / roll number slip and appear in the entry test.\n6) Check the merit list and complete enrolment on time.\nThe exact steps can change each session, so follow the current notice on the portal."
     },
     {
       "id": "documents",
       "title": "Required documents",
-      "keywords": ["document", "documents", "papers", "cnic", "b-form", "domicile", "photo", "marksheet", "certificate", "transcript", "attested", "kagzat"],
-      "answer": "Commonly required documents: CNIC/B-Form, domicile, recent passport-size photographs, matric and intermediate mark sheets/certificates (or equivalents), IBCC equivalence certificate where applicable, and proof of fee payment. Keep scanned copies ready for the portal upload and the originals for verification at enrolment."
+      "keywords": ["document", "documents", "papers", "cnic", "b-form", "domicile", "photo", "photograph", "marksheet", "certificate", "transcript", "attested", "kagzat", "hope certificate"],
+      "answer": "Commonly required: attested copies of Matric and Intermediate mark sheets/certificates (or equivalents), CNIC/B-Form, domicile, recent passport-size photographs and proof of fee payment, plus an IBCC equivalence certificate where applicable. Students awaiting results can usually apply provisionally with a hope certificate. Keep originals ready for verification at enrolment."
     },
     {
       "id": "deadlines",
       "title": "Deadlines and schedule",
-      "keywords": ["deadline", "last date", "date", "dates", "schedule", "open", "session", "fall", "spring", "timeline", "kab tak", "aakhri"],
-      "answer": "Admissions usually open once a year for the Fall session, with the entry test and merit lists following a few weeks later. Exact dates change every session, so I do not guess them. The official schedule is published on the admissions portal and DUET's social media pages."
+      "keywords": ["deadline", "last date", "date", "dates", "schedule", "open", "session", "fall", "spring", "timeline", "kab tak", "aakhri", "closing date"],
+      "answer": "Admissions usually run once a year with the entry test and merit lists following a few weeks after applications close. Different websites quote different dates, so I do not guess them. The official schedule is published on the admissions portal and DUET's official pages."
     },
     {
       "id": "fees",
       "title": "Fee structure",
-      "keywords": ["fee", "fees", "tuition", "cost", "price", "charges", "semester fee", "challan", "pay", "payment", "kitni", "paise", "self finance", "merit seat", "self-finance"],
-      "answer": "DUET offers merit-based seats and self-finance seats, and the fee differs by category. The portal lists application/test charges, an admission and security fee, and semester dues; self-finance and international tiers are higher than merit seats. Fee amounts are revised yearly, so please check the current Fee Structure page on the admissions portal before paying anything."
-    },
-    {
-      "id": "test",
-      "title": "Entry test and merit",
-      "keywords": ["test", "entry test", "exam", "merit", "aggregate", "formula", "weightage", "list", "selection", "cutoff", "closing"],
-      "answer": "Selection is by merit. The merit aggregate combines your matric result, intermediate result and entry test score using weights set by the university for that session. You can try the indicative aggregate calculator on this page. The official formula and previous closing merits are in the prospectus."
+      "keywords": ["fee", "fees", "tuition", "cost", "price", "charges", "semester fee", "challan", "pay", "payment", "kitni", "paise", "self finance", "self-finance", "merit seat", "expensive", "budget"],
+      "answer": "Fees depend on the seat category and program. Reported figures (third-party, approximate): application + test fee about Rs. 3,000 (non-refundable); one-time admission fee and refundable security deposit of about Rs. 5,000 each; tuition on merit seats roughly Rs. 32,000 per semester for BE/B.Arch/BS Math/Chemistry/Data Science and roughly Rs. 70,000 for BS CS/AI/Cyber Security/Environmental Science. Self-finance seats are much higher (the official fee page lists Rs. 400,000 and Rs. 600,000 plus taxes depending on program). Fees change every year, so confirm on the Fee Structure page of the admissions portal before paying."
     },
     {
       "id": "scholarship",
       "title": "Scholarships and financial aid",
-      "keywords": ["scholarship", "scholarships", "financial aid", "need based", "merit scholarship", "hafiz", "discount", "waiver", "stipend", "fee concession", "wazifa"],
-      "answer": "DUET and external bodies (such as HEC and provincial programs) offer merit-based and need-based support for eligible students. Availability and criteria vary each session, so check the Scholarships section of the portal or visit the Student Affairs / Admissions office."
+      "keywords": ["scholarship", "scholarships", "financial aid", "need based", "need-based", "merit scholarship", "hafiz", "discount", "waiver", "stipend", "fee concession", "wazifa", "peef", "indigenous", "hec"],
+      "answer": "Support reported for DUET students includes merit scholarships for top performers each semester, HEC need-based scholarships, the Indigenous (government-funded) scholarship program and external programs such as PEEF. Availability and criteria change every session, so check the Scholarships information on the portal or ask the Student Affairs / Admissions office."
     },
     {
       "id": "international",
       "title": "International students",
       "keywords": ["international", "foreign", "overseas", "abroad", "visa", "usd", "dollar", "non-pakistani", "expatriate"],
-      "answer": "International applicants apply through the dedicated international admissions section of the portal. They need an academic record with IBCC equivalence, a passport copy and the international admission/security fee (listed in USD). The portal has the list of programs open to foreign students."
+      "answer": "Overseas / foreign candidates apply through the international admissions section of the portal. They need an academic record with IBCC equivalence, a passport copy and the international admission/security fee (listed in USD, about 250 USD on the portal). A limited number of seats are reserved for overseas candidates."
     },
     {
       "id": "hostel",
       "title": "Hostel and facilities",
-      "keywords": ["hostel", "accommodation", "transport", "bus", "library", "lab", "labs", "cafeteria", "sports", "society", "societies", "facility", "facilities", "wifi"],
-      "answer": "The campus provides libraries, laboratories and student facilities. Hostel and transport availability can be limited and change per session, so please confirm with the Student Affairs office."
+      "keywords": ["hostel", "accommodation", "transport", "bus", "shuttle", "library", "lab", "labs", "cafeteria", "sports", "society", "societies", "facility", "facilities", "wifi", "auditorium"],
+      "answer": "The campus has libraries, laboratories, an auditorium and student facilities, and a shuttle bus service is reported. Hostel places are very limited, so many students arrange private housing. Please confirm current availability with the Student Affairs office."
     },
     {
       "id": "contact",
       "title": "Contact the admissions office",
-      "keywords": ["contact", "phone", "email", "helpline", "office", "number", "support", "call", "visit", "rabta"],
-      "answer": "For anything I cannot answer, contact the DUET admissions office through the Contact Us page on admissions.duet.edu.pk, or visit the campus admissions office on M.A. Jinnah Road, Karachi during working hours."
+      "keywords": ["contact", "phone", "email", "helpline", "office", "number", "support", "call", "visit", "rabta", "whatsapp"],
+      "answer": "Admissions portal: admissions.duet.edu.pk. Main website: www.duet.edu.pk. Address: M.A. Jinnah Road, Karachi-74800. A public phone listing gives +92 21 9923 1195/96. Please confirm contact details on the official site before calling or couriering documents."
     }
   ],
   "quickQuestions": [
+    "What is the minimum percentage required?",
     "How do I apply?",
-    "What is the eligibility criteria?",
+    "What is CPN and how is it calculated?",
     "Which programs are offered?",
     "What is the fee structure?",
-    "What documents do I need?",
-    "Tell me about scholarships"
+    "What documents do I need?"
   ]
 }

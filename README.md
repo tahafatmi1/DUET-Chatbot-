@@ -12,7 +12,7 @@ npm start
 
 Open http://localhost:3001. For development with hot reload use `npm run dev` (UI on http://localhost:5173).
 
-## Answer priority and optional AI
+## Answer priority and optional AI (default Gemini model: gemini-3.5-flash-lite; if you set GEMINI_MODEL, use a current model name)
 
 1. Greetings and safety rules.
 2. Our own knowledge base (`server/knowledge.json`) whenever it has a confident match.

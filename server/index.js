@@ -27,7 +27,7 @@ app.use(
   }),
 );
 
-const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-3.5-flash-lite';
 const GROQ_MODEL = process.env.GROQ_MODEL || 'openai/gpt-oss-120b';
 const XAI_MODEL = process.env.XAI_MODEL || 'grok-3-mini';
 
@@ -43,6 +43,7 @@ function llmProvider() {
 async function askGemini(messages, contextEntries) {
   const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`, {
     method: 'POST',
+    signal: AbortSignal.timeout(20_000),
     headers: { 'content-type': 'application/json', 'x-goog-api-key': process.env.GEMINI_API_KEY },
     body: JSON.stringify({
       systemInstruction: { parts: [{ text: buildSystemPrompt(contextEntries) }] },
@@ -59,6 +60,7 @@ async function askGemini(messages, contextEntries) {
 async function askOpenAiCompatible({ url, key, model, label }, messages, contextEntries) {
   const res = await fetch(url, {
     method: 'POST',
+    signal: AbortSignal.timeout(20_000),
     headers: { 'content-type': 'application/json', authorization: `Bearer ${key}` },
     body: JSON.stringify({
       model,
@@ -87,6 +89,7 @@ function askLlm(messages, contextEntries) {
 async function askClaude(messages, contextEntries) {
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
+    signal: AbortSignal.timeout(20_000),
     headers: {
       'content-type': 'application/json',
       'x-api-key': process.env.ANTHROPIC_API_KEY,

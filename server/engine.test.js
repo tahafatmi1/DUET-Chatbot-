@@ -27,7 +27,7 @@ test('sensitive data is refused', () => {
 import { confidentKnowledgeReply } from './engine.js';
 
 test('confident match answers from our own knowledge base', () => {
-  assert.match(confidentKnowledgeReply('What is the fee structure?'), /merit-based seats/);
+  assert.match(confidentKnowledgeReply('What is the fee structure?'), /Fees depend on the seat category/);
 });
 test('unknown question is not confident, so it can go to the LLM', () => {
   assert.equal(confidentKnowledgeReply('who won the cricket match'), null);
@@ -39,4 +39,27 @@ test('program change question gets the program-change answer, not the program li
 test('program list question still gets programs', () => {
   assert.equal(retrieve('Which programs are offered?')[0].id, 'programs');
   assert.equal(retrieve('Which department has software engineering?')[0].id, 'programs');
+});
+
+test('minimum percentage question gets eligibility with the 60% and 50% rules', () => {
+  const reply = confidentKnowledgeReply('What is the minimum percentage required?');
+  assert.match(reply, /BE\) programs: at least 60%/);
+  assert.match(reply, /BS\) programs: at least 50%/);
+});
+test('CPN question gets the CPN formula', () => {
+  assert.equal(retrieve('What is CPN and how is it calculated?')[0].id, 'cpn');
+  assert.match(confidentKnowledgeReply('cpn formula'), /10% Matric \+ 30% Intermediate \+ 60% Entry Test/);
+});
+test('Roman Urdu eligibility', () => {
+  assert.equal(retrieve('minimum marks kitne chahiye')[0].id, 'eligibility');
+});
+
+test('hostel question is not hijacked by the about entry', () => {
+  assert.equal(retrieve('Is there a hostel for girls at DUET?')[0].id, 'hostel');
+});
+test('plural A-levels still matches eligibility', () => {
+  assert.equal(retrieve('Can I apply with A-levels?')[0].id, 'eligibility');
+});
+test('comparison questions are not answered from a single entry', () => {
+  assert.equal(confidentKnowledgeReply('Which is better, DUET or NED for computer engineering?'), null);
 });

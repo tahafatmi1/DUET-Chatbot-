@@ -3,8 +3,8 @@ import { motion } from 'motion/react';
 const steps = [
   ['Register', 'Create your account on the admissions portal.'],
   ['Apply', 'Fill the form and choose your program preferences.'],
-  ['Pay & upload', 'Upload documents and pay the application fee by challan.'],
-  ['Entry test', 'Download your roll number slip and appear in the test.'],
+  ['Pay & send', 'Pay the fee by challan, then send the form, documents and receipt.'],
+  ['Entry test', 'Download your admit card and appear in the test.'],
   ['Merit & enrol', 'Check the merit list and complete enrolment on time.'],
 ];
 
