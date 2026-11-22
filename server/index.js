@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
-import cors from 'cors';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -10,8 +11,21 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const MODEL = process.env.ANTHROPIC_MODEL || 'claude-haiku-5-5';
 
-app.use(cors());
+// Render sits behind a proxy; trust one hop so rate limiting sees the real client IP.
+app.set('trust proxy', 1);
+app.use(helmet());
+// No CORS: the page and the API share one origin, so other websites cannot call the API from a browser.
 app.use(express.json({ limit: '50kb' }));
+app.use(
+  '/api/chat',
+  rateLimit({
+    windowMs: 60_000,
+    limit: 20,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { error: 'Too many messages. Please wait a minute and try again.' },
+  }),
+);
 
 const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
 const GROQ_MODEL = process.env.GROQ_MODEL || 'openai/gpt-oss-120b';
@@ -122,11 +136,19 @@ app.post('/api/chat', async (req, res) => {
   res.json({ reply, source });
 });
 
+app.use('/api', (_req, res) => res.status(404).json({ error: 'Not found.' }));
+
 const dist = join(dirname(fileURLToPath(import.meta.url)), '..', 'dist');
 if (existsSync(dist)) {
   app.use(express.static(dist));
   app.use((_req, res) => res.sendFile(join(dist, 'index.html')));
 }
+
+// Always answer errors (for example malformed JSON) as JSON, never as an HTML page.
+app.use((err, _req, res, _next) => {
+  const status = err.status && err.status < 500 ? err.status : 500;
+  res.status(status).json({ error: status === 413 ? 'Message too large.' : status < 500 ? 'Bad request.' : 'Server error.' });
+});
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   app.listen(PORT, () => console.log(`DUET chatbot API on http://localhost:${PORT}`));

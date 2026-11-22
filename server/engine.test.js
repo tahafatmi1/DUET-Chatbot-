@@ -32,3 +32,11 @@ test('confident match answers from our own knowledge base', () => {
 test('unknown question is not confident, so it can go to the LLM', () => {
   assert.equal(confidentKnowledgeReply('who won the cricket match'), null);
 });
+
+test('program change question gets the program-change answer, not the program list', () => {
+  assert.equal(retrieve('Can I change my program after admission?')[0].id, 'program-change');
+});
+test('program list question still gets programs', () => {
+  assert.equal(retrieve('Which programs are offered?')[0].id, 'programs');
+  assert.equal(retrieve('Which department has software engineering?')[0].id, 'programs');
+});

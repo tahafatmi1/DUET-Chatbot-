@@ -15,6 +15,12 @@
       "answer": "DUET offers undergraduate BE/BS/B.Arch programs in engineering and technology. Examples listed on the admissions portal include Civil, Electrical, Electronic, Mechanical, Chemical, Industrial Engineering & Management, Petroleum & Gas, Materials, Telecommunication, Software Engineering and BS Information Security Engineering. Postgraduate (MS/PhD) programs are announced separately each session. The exact list for the current session is on the admissions portal."
     },
     {
+      "id": "program-change",
+      "title": "Changing program or department",
+      "keywords": ["change", "switch", "transfer", "shift", "migrate", "migration", "program", "department", "branch", "badalna"],
+      "answer": "Changing your program or department after admission is governed by DUET's academic rules and usually has conditions (such as merit, seat availability and notified deadlines). I do not have the exact policy, so please ask the admissions office or check the current prospectus before relying on it."
+    },
+    {
       "id": "eligibility",
       "title": "Eligibility criteria",
       "keywords": ["eligibility", "eligible", "criteria", "requirement", "requirements", "marks", "percentage", "qualify", "intermediate", "fsc", "pre-engineering", "a level", "dae", "hsc", "ikhtiyar", "shart", "shara'it"],

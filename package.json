@@ -10,9 +10,10 @@
     "test": "node --test server/engine.test.js"
   },
   "dependencies": {
-    "cors": "^2.8.6",
     "dotenv": "^18.0.10",
     "express": "^5.3.0",
+    "express-rate-limit": "^8.7.5",
+    "helmet": "^8.3.0",
     "lucide-react": "^1.77.0",
     "motion": "^14.14.0",
     "react": "^19.3.1",
