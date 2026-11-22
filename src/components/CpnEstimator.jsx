@@ -135,7 +135,7 @@ export default function CpnEstimator() {
 
             <div className="mt-5 space-y-3">
               <Slider id="matric" label="Matric %" weight="10%" value={v.matric} onChange={set('matric')} />
-              <Slider id="inter" label="Intermediate %" weight="30%" value={v.inter} onChange={set('inter')} />
+              <Slider id="inter" label="Intermediate % (2nd year)" weight="30%" value={v.inter} onChange={set('inter')} />
               <Slider id="test" label="Entry test %" weight="60%" value={v.test} onChange={set('test')} />
             </div>
           </div>
@@ -152,8 +152,8 @@ export default function CpnEstimator() {
               {eligible ? <ShieldCheck className="mt-0.5 shrink-0" size={18} /> : <ShieldAlert className="mt-0.5 shrink-0" size={18} />}
               <span>
                 {eligible
-                  ? `Intermediate ${clamp(v.inter)}% meets the ${MIN_INTER[degree]}% minimum for ${degree} programs.`
-                  : `${degree} programs need at least ${MIN_INTER[degree]}% in Intermediate. You are ${(MIN_INTER[degree] - clamp(v.inter)).toFixed(0)}% short.`}
+                  ? `2nd-year Intermediate ${clamp(v.inter)}% meets the ${MIN_INTER[degree]}% minimum for ${degree} programs.`
+                  : `${degree} programs need at least ${MIN_INTER[degree]}% in 2nd-year Intermediate. You are ${(MIN_INTER[degree] - clamp(v.inter)).toFixed(0)}% short.`}
               </span>
             </motion.div>
             <p className="flex items-center gap-2 text-center text-xs text-slate-400">

@@ -142,7 +142,7 @@ bullets([
     "Answer questions on programs, eligibility, application procedure, documents, deadlines, fees and scholarships.",
     "Support English and Roman Urdu queries.",
     "Integrate a large language model (Google Gemini) behind a retrieval step so the university's own answers have priority and the model only handles questions the knowledge base cannot answer.",
-    "Provide a CPN Estimator that calculates the merit score and checks the minimum Intermediate percentage (BE 60%, BS 50%).",
+    "Provide a CPN Estimator that calculates the merit score and checks the minimum 2nd-year Intermediate percentage (BE 60%, BS 50%).",
     "Guarantee graceful degradation through a rule-based fallback when the AI service is unavailable.",
     "Harden and deploy the application (security headers, rate limiting, hosting on Render).",
     "Protect users by refusing requests for sensitive data and by never fabricating dates or fee amounts.",
@@ -207,7 +207,7 @@ table([
     ["GET /api/config", "Returns university name and quick-question chips"],
     ["POST /api/chat", "Accepts messages, returns reply and source (knowledge-base or gemini); limited to 20 requests per minute per client"],
 ], ["Endpoint", "Description"])
-para("CPN Estimator: the page tool computes CPN = 0.10 x Matric + 0.30 x Intermediate + 0.60 x Entry Test (for example 80, 75 and 70 give 72.50) and shows an animated circular gauge. A BE/BS switch checks the minimum Intermediate percentage and reports how many marks are missing. The result is indicative; the official formula, which also mentions a deduction for results older than one year, is on the admissions portal.")
+para("CPN Estimator: the page tool computes CPN = 0.10 x Matric + 0.30 x Intermediate + 0.60 x Entry Test (for example 80, 75 and 70 give 72.50) and shows an animated circular gauge. A BE/BS switch checks the minimum 2nd-year Intermediate percentage (this is an eligibility rule, separate from the CPN score) and reports how many marks are missing. The result is indicative; the official formula, which also mentions a deduction for results older than one year, is on the admissions portal.")
 para("Security measures: helmet security headers (including a content-security policy), a rate limit on the chat endpoint, a 50 KB request-body limit, only the last ten messages of 1,000 characters each, no cross-origin (CORS) access, JSON-only error responses, refusal of password/OTP/card details, and API keys kept in server environment variables.")
 doc.add_heading("AI Model/API Integration", 2)
 para("Our own answers have priority. The server first handles greetings and safety rules, then answers from the knowledge base whenever the keyword match is confident (score of at least 2; comparison questions such as DUET versus another university are never answered from a single entry). Only when no confident match exists and an API key is configured does it call a language model. Google Gemini is the primary provider (GEMINI_API_KEY, model set by GEMINI_MODEL, default gemini-3.5-flash-lite) and is called through the Generative Language REST API with a system instruction, the conversation turns and a 20-second timeout. Groq, xAI Grok and Anthropic Claude are supported as alternatives in that order of priority. The system prompt contains the university name, strict behavioural rules and the retrieved knowledge entries, and tells the model to use only that knowledge and never invent dates or fees. If the call fails or no key exists, the bot returns the best weak match or a polite fallback that points to the admissions office. During testing, the originally configured model gemini-2.5-flash returned HTTP 404 (no longer available to new keys); listing the available models and switching to gemini-3.5-flash-lite fixed it, which is why the model name is configurable. Keys are read from environment variables and never reach the browser.")
@@ -221,7 +221,7 @@ para("Testing had four layers: 17 automated unit tests (npm test, all passed), A
 table([
     ["T1", "'How do I apply?'", "Application-steps entry", "Pass"],
     ["T2", "'fee kitni hai' (Roman Urdu)", "Fee-structure entry", "Pass"],
-    ["T3", "'What is the minimum percentage required?'", "Eligibility entry with BE 60% and BS 50%", "Pass"],
+    ["T3", "'What is the minimum percentage required?'", "Eligibility entry: 2nd-year Intermediate at least 60% (BE) and 50% (BS)", "Pass"],
     ["T4", "'What is CPN and how is it calculated?'", "CPN entry with 10/30/60 formula", "Pass"],
     ["T5", "'Which programs are offered?' / 'Which department has software engineering?'", "Programs entry", "Pass"],
     ["T6", "'Can I change my program after admission?'", "Program-change entry, not the program list", "Pass"],
@@ -239,7 +239,7 @@ table([
     ["T18", "Request /.env and /server/index.js on the live site", "Only the web page is returned, no source or secrets", "Pass"],
     ["T19", "Browser: tap quick chip (375 px mobile)", "Typing indicator then answer; no horizontal scroll; no console errors", "Pass"],
     ["T20", "CPN Estimator: 80 / 75 / 70", "Gauge shows 72.50", "Pass"],
-    ["T21", "CPN Estimator: Intermediate 55%, BE then BS", "BE: 5% short of 60%; BS: meets 50%", "Pass"],
+    ["T21", "CPN Estimator: 2nd-year Intermediate 55%, BE then BS", "BE: 5% short of 60%; BS: meets 50%", "Pass"],
     ["T22", "Production build (vite build) and npm audit", "Builds without errors; 0 vulnerabilities", "Pass"],
     ["T23", "Deployed site https://duet-chatbot.onrender.com (first release)", "Health, config and chat endpoints respond; UI loads", "Pass"],
 ], ["ID", "Input / action", "Expected result", "Status"])

@@ -63,3 +63,8 @@ test('plural A-levels still matches eligibility', () => {
 test('comparison questions are not answered from a single entry', () => {
   assert.equal(confidentKnowledgeReply('Which is better, DUET or NED for computer engineering?'), null);
 });
+
+test('2nd year intermediate question gets the eligibility rule', () => {
+  assert.equal(retrieve('How much do I need in 2nd year inter for BS?')[0].id, 'eligibility');
+  assert.match(confidentKnowledgeReply('2nd year percentage required'), /2nd-year Intermediate result/);
+});
