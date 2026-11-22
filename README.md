@@ -12,9 +12,14 @@ npm start
 
 Open http://localhost:3001. For development with hot reload use `npm run dev` (UI on http://localhost:5173).
 
-## Enable Claude (optional)
+## Answer priority and optional AI
 
-Copy `.env.example` to `.env` and set `ANTHROPIC_API_KEY`. Without it the bot answers from `server/knowledge.json`.
+1. Greetings and safety rules.
+2. Our own knowledge base (`server/knowledge.json`) whenever it has a confident match.
+3. Only if the knowledge base does not know the answer: an optional LLM, Grok (`XAI_API_KEY`) or Claude (`ANTHROPIC_API_KEY`).
+4. Otherwise a polite fallback pointing to the admissions office.
+
+Copy `.env.example` to `.env` to add a key. With no key the bot works fully from the knowledge base.
 
 ## Test
 

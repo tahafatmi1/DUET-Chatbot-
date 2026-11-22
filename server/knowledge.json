@@ -5,7 +5,7 @@
     {
       "id": "about",
       "title": "About DUET",
-      "keywords": ["about", "dawood", "duet", "university", "history", "founded", "kab", "kya hai", "location", "address", "where", "campus", "karachi"],
+      "keywords": ["dawood", "duet", "university", "history", "founded", "kab", "kya hai", "location", "address", "campus", "karachi"],
       "answer": "Dawood University of Engineering and Technology (DUET) is a public-sector engineering university in Karachi, on M.A. Jinnah Road. It began as Dawood College of Engineering and Technology in 1962 and was granted university status in 2012."
     },
     {
@@ -23,7 +23,7 @@
     {
       "id": "apply",
       "title": "How to apply",
-      "keywords": ["apply", "application", "process", "procedure", "register", "registration", "portal", "form", "online", "steps", "how", "kaise", "admission lena"],
+      "keywords": ["apply", "application", "process", "procedure", "register", "registration", "portal", "form", "online", "steps", "kaise", "admission lena"],
       "answer": "Application steps: 1) Register on the DUET admissions portal and create your account. 2) Fill in the online form with your academic and personal details. 3) Select your program preferences. 4) Upload the required documents and pay the application/test fee through the bank challan or the supported banking app. 5) Download your roll number slip and appear in the entry test. 6) Check the merit list and complete enrolment within the notified dates."
     },
     {
@@ -35,7 +35,7 @@
     {
       "id": "deadlines",
       "title": "Deadlines and schedule",
-      "keywords": ["deadline", "last date", "date", "dates", "schedule", "when", "open", "session", "fall", "spring", "timeline", "kab tak", "aakhri"],
+      "keywords": ["deadline", "last date", "date", "dates", "schedule", "open", "session", "fall", "spring", "timeline", "kab tak", "aakhri"],
       "answer": "Admissions usually open once a year for the Fall session, with the entry test and merit lists following a few weeks later. Exact dates change every session, so I do not guess them. The official schedule is published on the admissions portal and DUET's social media pages."
     },
     {
@@ -71,7 +71,7 @@
     {
       "id": "contact",
       "title": "Contact the admissions office",
-      "keywords": ["contact", "phone", "email", "helpline", "office", "number", "help", "support", "call", "visit", "rabta"],
+      "keywords": ["contact", "phone", "email", "helpline", "office", "number", "support", "call", "visit", "rabta"],
       "answer": "For anything I cannot answer, contact the DUET admissions office through the Contact Us page on admissions.duet.edu.pk, or visit the campus admissions office on M.A. Jinnah Road, Karachi during working hours."
     }
   ],

@@ -23,7 +23,7 @@ def draw_flowchart():
         "Express validates input\n(length, last 10 messages)",
         "Safety check\n(password / OTP / card?)",
         "Retrieve top matches from\nknowledge base (keywords)",
-        "API key set?",
+        "No match: LLM key set?",
         "Claude answers using\nretrieved context",
         "Rule-based answer\nfrom knowledge base",
         "Reply shown in chat window",
@@ -130,7 +130,7 @@ doc.add_page_break()
 
 # ---- 1 Abstract ----
 doc.add_heading("1. Abstract", 1)
-para("Prospective students of Dawood University of Engineering and Technology (DUET), Karachi, repeatedly ask the same questions about programs, eligibility, application steps, deadlines and fees, and answers are spread across several web pages. This project presents DUET Admission Assistant, a web-based chatbot that answers these questions instantly in English or Roman Urdu. The system uses a React and Tailwind CSS front end with Motion animations, a Node.js and Express back end, a curated JSON knowledge base searched by a keyword-ranking retriever, and the Claude large language model (via the Anthropic Messages API) to phrase grounded answers. When no API key is configured or the API fails, the bot falls back to rule-based answers so the service stays available. Safety rules prevent the bot from inventing dates or fees and from accepting sensitive data. Automated tests and browser testing confirmed correct retrieval, safe handling of invalid input and a responsive interface. The project fulfils CLO-3: developing a web application using modern technologies.")
+para("Prospective students of Dawood University of Engineering and Technology (DUET), Karachi, repeatedly ask the same questions about programs, eligibility, application steps, deadlines and fees, and answers are spread across several web pages. This project presents DUET Admission Assistant, a web-based chatbot that answers these questions instantly in English or Roman Urdu. The system uses a React and Tailwind CSS front end with Motion animations, a Node.js and Express back end, a curated JSON knowledge base searched by a keyword-ranking retriever that answers first, and an optional large language model (Grok from xAI, or Claude) that is consulted only when the knowledge base has no confident answer. When no API key is configured or the API fails, the bot falls back to a polite message so the service stays available. Safety rules prevent the bot from inventing dates or fees and from accepting sensitive data. Automated tests and browser testing confirmed correct retrieval, safe handling of invalid input and a responsive interface. The project fulfils CLO-3: developing a web application using modern technologies.")
 
 # ---- 2 Introduction ----
 doc.add_heading("2. Introduction", 1)
@@ -172,7 +172,7 @@ table([
     ["Motion (motion/react)", "Entrance, hover and typing-indicator animations"],
     ["lucide-react", "Icon set"],
     ["Node.js + Express 5", "REST API and static hosting of the build"],
-    ["Anthropic Messages API (Claude Haiku)", "Natural-language answer generation"],
+    ["xAI Grok API / Anthropic Claude (optional)", "Answers for questions outside the knowledge base"],
     ["JSON knowledge base", "Curated admission facts with keywords"],
     ["node:test", "Automated unit tests"],
 ], ["Technology", "Purpose"])
@@ -181,7 +181,7 @@ bullets([
     "Requirement analysis: reviewed the project brief (University Admission domain) and the official DUET admissions portal.",
     "Knowledge design: grouped information into twelve topics, each with keywords and a verified-style answer that avoids unverified numbers.",
     "Retrieval: tokenise the question, drop stop-words, score entries by keyword matches (longer keywords weigh more) and return the top matches.",
-    "Generation: send the retrieved entries and strict rules to Claude as the system prompt; use rule-based output if the call fails.",
+    "Priority: answer from our own knowledge base when the match is confident; otherwise, if a key is configured, send the retrieved entries and strict rules to Grok (or Claude) as the system prompt; use the fallback if the call fails.",
     "Safety: block requests containing passwords, OTPs or card details; never invent dates or fees.",
     "Interface design: mobile-first dark navy and gold theme, accessible chat log, quick-question chips, reduced-motion support.",
     "Testing and iteration: unit tests, API tests with curl and manual browser tests.",
@@ -202,7 +202,7 @@ table([
     ["POST /api/chat", "Accepts messages, returns reply and source"],
 ], ["Endpoint", "Description"])
 doc.add_heading("AI Model/API Integration", 2)
-para("When ANTHROPIC_API_KEY is present, the server calls the Anthropic Messages API (model claude-haiku-5-5, max 500 tokens). The system prompt contains the university name, behavioural rules and the top three knowledge entries retrieved for the latest question. Only the last ten messages, each truncated to 1,000 characters, are sent. If the call fails or no key exists, ruleBasedReply returns the best-matching knowledge-base entries, or a polite fallback that points to the admissions office. The API key is read from environment variables and never reaches the browser.")
+para("Our own answers have priority. The server first handles greetings and safety rules, then answers from the knowledge base whenever the keyword match is confident (score of at least 2). Only when no confident match exists and an API key is configured does it call an external LLM: Grok through the xAI chat-completions endpoint (XAI_API_KEY, model set by XAI_MODEL) or, alternatively, Claude through the Anthropic Messages API. The prompt contains the university name, strict behavioural rules and the retrieved knowledge entries; only the last ten messages, each truncated to 1,000 characters, are sent. If the call fails or no key exists, the bot returns the best weak match or a polite fallback that points to the admissions office. Keys are read from environment variables and never reach the browser.")
 doc.add_heading("Screenshots", 2)
 for img, cap in (("shot-home.jpg", "Figure 2: Landing page with animated hero and statistics"), ("shot-chat.jpg", "Figure 3: Chat window answering 'How do I apply?'")):
     doc.add_picture(os.path.join(HERE, img), width=Inches(5.2))

@@ -15,15 +15,22 @@ export function tokenize(text) {
     .filter((t) => t && !STOP.has(t));
 }
 
+/** Minimum score for a knowledge-base entry to be trusted without asking an LLM. */
+export const CONFIDENT_SCORE = 2;
+
 /** Score every knowledge entry against a query and return the ranked list. */
 export function retrieve(query, limit = 3) {
+  return retrieveScored(query, limit).map((s) => s.entry);
+}
+
+export function retrieveScored(query, limit = 3) {
   const tokens = tokenize(query);
   const lower = query.toLowerCase();
   const scored = knowledge.entries.map((entry) => {
     let score = 0;
     for (const keyword of entry.keywords) {
       if (keyword.includes(' ') ? lower.includes(keyword) : tokens.includes(keyword)) {
-        score += keyword.length > 4 ? 2 : 1;
+        score += keyword.length > 2 ? 2 : 1;
       }
     }
     return { entry, score };
@@ -31,8 +38,7 @@ export function retrieve(query, limit = 3) {
   return scored
     .filter((s) => s.score > 0)
     .sort((a, b) => b.score - a.score)
-    .slice(0, limit)
-    .map((s) => s.entry);
+    .slice(0, limit);
 }
 
 const GREETING = /^(hi|hello|hey|salam|assalam|aoa|good (morning|evening)|helo)\b/i;
@@ -42,8 +48,8 @@ const SENSITIVE = /\b(password|pin|otp|card number|account number|cvv)\b/i;
 export const FALLBACK =
   "I could not find that in my admission knowledge base. I can help with programs, eligibility, how to apply, documents, deadlines, fees, scholarships and contacts. For anything else please contact the admissions office via admissions.duet.edu.pk.";
 
-/** Rule-based answer used when no LLM key is configured or the API fails. */
-export function ruleBasedReply(message) {
+/** Safety, greeting and thanks replies. Returns null when the message needs a real answer. */
+export function quickReply(message) {
   if (SENSITIVE.test(message)) {
     return 'Please never share passwords, PINs, OTPs or card details with anyone, including me. The admissions office will never ask for them in chat.';
   }
@@ -51,6 +57,20 @@ export function ruleBasedReply(message) {
   if (GREETING.test(message.trim()) && tokenize(message).length <= 2) {
     return "Assalam-o-Alaikum! I am the DUET Admission Assistant. Ask me about programs, eligibility, how to apply, fees, deadlines or scholarships.";
   }
+  return null;
+}
+
+/** Our own knowledge-base answer when the match is confident, otherwise null. */
+export function confidentKnowledgeReply(message) {
+  const hits = retrieveScored(message, 2);
+  if (!hits.length || hits[0].score < CONFIDENT_SCORE) return null;
+  return hits.map((h) => h.entry.answer).join('\n\n');
+}
+
+/** Full rule-based answer (own answers first, weak match still better than nothing). */
+export function ruleBasedReply(message) {
+  const quick = quickReply(message);
+  if (quick) return quick;
   const hits = retrieve(message, 2);
   if (!hits.length) return FALLBACK;
   return hits.map((h) => h.answer).join('\n\n');

@@ -23,3 +23,12 @@ test('off-topic gets fallback', () => {
 test('sensitive data is refused', () => {
   assert.match(ruleBasedReply('my otp is 1234'), /never share/);
 });
+
+import { confidentKnowledgeReply } from './engine.js';
+
+test('confident match answers from our own knowledge base', () => {
+  assert.match(confidentKnowledgeReply('What is the fee structure?'), /merit-based seats/);
+});
+test('unknown question is not confident, so it can go to the LLM', () => {
+  assert.equal(confidentKnowledgeReply('who won the cricket match'), null);
+});
