@@ -13,32 +13,61 @@ const MODEL = process.env.ANTHROPIC_MODEL || 'claude-haiku-5-5';
 app.use(cors());
 app.use(express.json({ limit: '50kb' }));
 
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+const GROQ_MODEL = process.env.GROQ_MODEL || 'openai/gpt-oss-120b';
 const XAI_MODEL = process.env.XAI_MODEL || 'grok-3-mini';
 
-/** Which optional LLM is configured: 'grok' (xAI), 'claude', or null. */
+/** Which optional LLM is configured, in priority order, or null. */
 function llmProvider() {
+  if (process.env.GEMINI_API_KEY) return 'gemini';
+  if (process.env.GROQ_API_KEY) return 'groq';
   if (process.env.XAI_API_KEY) return 'grok';
   if (process.env.ANTHROPIC_API_KEY) return 'claude';
   return null;
 }
 
-async function askGrok(messages, contextEntries) {
-  const res = await fetch('https://api.x.ai/v1/chat/completions', {
+async function askGemini(messages, contextEntries) {
+  const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`, {
     method: 'POST',
-    headers: { 'content-type': 'application/json', authorization: `Bearer ${process.env.XAI_API_KEY}` },
+    headers: { 'content-type': 'application/json', 'x-goog-api-key': process.env.GEMINI_API_KEY },
     body: JSON.stringify({
-      model: XAI_MODEL,
+      systemInstruction: { parts: [{ text: buildSystemPrompt(contextEntries) }] },
+      contents: messages.map((m) => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.content }] })),
+      generationConfig: { maxOutputTokens: 500 },
+    }),
+  });
+  if (!res.ok) throw new Error(`Gemini API ${res.status}`);
+  const data = await res.json();
+  return data.candidates?.[0]?.content?.parts?.map((p) => p.text).join('').trim();
+}
+
+/** Groq and xAI both expose an OpenAI-compatible chat-completions endpoint. */
+async function askOpenAiCompatible({ url, key, model, label }, messages, contextEntries) {
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', authorization: `Bearer ${key}` },
+    body: JSON.stringify({
+      model,
       max_tokens: 500,
       messages: [{ role: 'system', content: buildSystemPrompt(contextEntries) }, ...messages],
     }),
   });
-  if (!res.ok) throw new Error(`xAI API ${res.status}`);
+  if (!res.ok) throw new Error(`${label} API ${res.status}`);
   const data = await res.json();
   return data.choices?.[0]?.message?.content?.trim();
 }
 
 function askLlm(messages, contextEntries) {
-  return llmProvider() === 'grok' ? askGrok(messages, contextEntries) : askClaude(messages, contextEntries);
+  switch (llmProvider()) {
+    case 'gemini':
+      return askGemini(messages, contextEntries);
+    case 'groq':
+      return askOpenAiCompatible({ url: 'https://api.groq.com/openai/v1/chat/completions', key: process.env.GROQ_API_KEY, model: GROQ_MODEL, label: 'Groq' }, messages, contextEntries);
+    case 'grok':
+      return askOpenAiCompatible({ url: 'https://api.x.ai/v1/chat/completions', key: process.env.XAI_API_KEY, model: XAI_MODEL, label: 'xAI' }, messages, contextEntries);
+    default:
+      return askClaude(messages, contextEntries);
+  }
 }
 
 async function askClaude(messages, contextEntries) {
