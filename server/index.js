@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import helmet from 'helmet';
-import rateLimit from 'express-rate-limit';
+import rateLimit, { ipKeyGenerator } from 'express-rate-limit';
 import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -23,6 +23,8 @@ app.use(
     limit: 20,
     standardHeaders: true,
     legacyHeaders: false,
+    // Behind Render's Cloudflare layer req.ip can be a shared or changing edge address, so prefer the real client IP header.
+    keyGenerator: (req) => ipKeyGenerator(req.headers['cf-connecting-ip'] || req.ip),
     message: { error: 'Too many messages. Please wait a minute and try again.' },
   }),
 );
