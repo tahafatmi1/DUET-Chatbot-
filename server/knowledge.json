@@ -1,0 +1,86 @@
+{
+  "university": "Dawood University of Engineering and Technology (DUET), Karachi",
+  "portal": "https://admissions.duet.edu.pk",
+  "entries": [
+    {
+      "id": "about",
+      "title": "About DUET",
+      "keywords": ["about", "dawood", "duet", "university", "history", "founded", "kab", "kya hai", "location", "address", "where", "campus", "karachi"],
+      "answer": "Dawood University of Engineering and Technology (DUET) is a public-sector engineering university in Karachi, on M.A. Jinnah Road. It began as Dawood College of Engineering and Technology in 1962 and was granted university status in 2012."
+    },
+    {
+      "id": "programs",
+      "title": "Academic programs",
+      "keywords": ["program", "programs", "degree", "department", "course", "courses", "be", "bs", "engineering", "software", "civil", "electrical", "mechanical", "chemical", "petroleum", "textile", "architecture", "materials", "industrial", "telecom", "electronic", "computer", "information security", "kya parh", "subjects"],
+      "answer": "DUET offers undergraduate BE/BS/B.Arch programs in engineering and technology. Examples listed on the admissions portal include Civil, Electrical, Electronic, Mechanical, Chemical, Industrial Engineering & Management, Petroleum & Gas, Materials, Telecommunication, Software Engineering and BS Information Security Engineering. Postgraduate (MS/PhD) programs are announced separately each session. The exact list for the current session is on the admissions portal."
+    },
+    {
+      "id": "eligibility",
+      "title": "Eligibility criteria",
+      "keywords": ["eligibility", "eligible", "criteria", "requirement", "requirements", "marks", "percentage", "qualify", "intermediate", "fsc", "pre-engineering", "a level", "dae", "hsc", "ikhtiyar", "shart", "shara'it"],
+      "answer": "Typical eligibility for BE programs is intermediate (HSC Pre-Engineering) or equivalent (A-Level / DAE where recognised) with a minimum percentage, commonly around 60% for BE and around 50% for BS/B.Arch. Foreign or Cambridge/IBCC-equivalent candidates need an IBCC equivalence certificate. Minimums change each session, so please confirm in the current prospectus."
+    },
+    {
+      "id": "apply",
+      "title": "How to apply",
+      "keywords": ["apply", "application", "process", "procedure", "register", "registration", "portal", "form", "online", "steps", "how", "kaise", "admission lena"],
+      "answer": "Application steps: 1) Register on the DUET admissions portal and create your account. 2) Fill in the online form with your academic and personal details. 3) Select your program preferences. 4) Upload the required documents and pay the application/test fee through the bank challan or the supported banking app. 5) Download your roll number slip and appear in the entry test. 6) Check the merit list and complete enrolment within the notified dates."
+    },
+    {
+      "id": "documents",
+      "title": "Required documents",
+      "keywords": ["document", "documents", "papers", "cnic", "b-form", "domicile", "photo", "marksheet", "certificate", "transcript", "attested", "kagzat"],
+      "answer": "Commonly required documents: CNIC/B-Form, domicile, recent passport-size photographs, matric and intermediate mark sheets/certificates (or equivalents), IBCC equivalence certificate where applicable, and proof of fee payment. Keep scanned copies ready for the portal upload and the originals for verification at enrolment."
+    },
+    {
+      "id": "deadlines",
+      "title": "Deadlines and schedule",
+      "keywords": ["deadline", "last date", "date", "dates", "schedule", "when", "open", "session", "fall", "spring", "timeline", "kab tak", "aakhri"],
+      "answer": "Admissions usually open once a year for the Fall session, with the entry test and merit lists following a few weeks later. Exact dates change every session, so I do not guess them. The official schedule is published on the admissions portal and DUET's social media pages."
+    },
+    {
+      "id": "fees",
+      "title": "Fee structure",
+      "keywords": ["fee", "fees", "tuition", "cost", "price", "charges", "semester fee", "challan", "pay", "payment", "kitni", "paise", "self finance", "merit seat", "self-finance"],
+      "answer": "DUET offers merit-based seats and self-finance seats, and the fee differs by category. The portal lists application/test charges, an admission and security fee, and semester dues; self-finance and international tiers are higher than merit seats. Fee amounts are revised yearly, so please check the current Fee Structure page on the admissions portal before paying anything."
+    },
+    {
+      "id": "test",
+      "title": "Entry test and merit",
+      "keywords": ["test", "entry test", "exam", "merit", "aggregate", "formula", "weightage", "list", "selection", "cutoff", "closing"],
+      "answer": "Selection is by merit. The merit aggregate combines your matric result, intermediate result and entry test score using weights set by the university for that session. You can try the indicative aggregate calculator on this page. The official formula and previous closing merits are in the prospectus."
+    },
+    {
+      "id": "scholarship",
+      "title": "Scholarships and financial aid",
+      "keywords": ["scholarship", "scholarships", "financial aid", "need based", "merit scholarship", "hafiz", "discount", "waiver", "stipend", "fee concession", "wazifa"],
+      "answer": "DUET and external bodies (such as HEC and provincial programs) offer merit-based and need-based support for eligible students. Availability and criteria vary each session, so check the Scholarships section of the portal or visit the Student Affairs / Admissions office."
+    },
+    {
+      "id": "international",
+      "title": "International students",
+      "keywords": ["international", "foreign", "overseas", "abroad", "visa", "usd", "dollar", "non-pakistani", "expatriate"],
+      "answer": "International applicants apply through the dedicated international admissions section of the portal. They need an academic record with IBCC equivalence, a passport copy and the international admission/security fee (listed in USD). The portal has the list of programs open to foreign students."
+    },
+    {
+      "id": "hostel",
+      "title": "Hostel and facilities",
+      "keywords": ["hostel", "accommodation", "transport", "bus", "library", "lab", "labs", "cafeteria", "sports", "society", "societies", "facility", "facilities", "wifi"],
+      "answer": "The campus provides libraries, laboratories and student facilities. Hostel and transport availability can be limited and change per session, so please confirm with the Student Affairs office."
+    },
+    {
+      "id": "contact",
+      "title": "Contact the admissions office",
+      "keywords": ["contact", "phone", "email", "helpline", "office", "number", "help", "support", "call", "visit", "rabta"],
+      "answer": "For anything I cannot answer, contact the DUET admissions office through the Contact Us page on admissions.duet.edu.pk, or visit the campus admissions office on M.A. Jinnah Road, Karachi during working hours."
+    }
+  ],
+  "quickQuestions": [
+    "How do I apply?",
+    "What is the eligibility criteria?",
+    "Which programs are offered?",
+    "What is the fee structure?",
+    "What documents do I need?",
+    "Tell me about scholarships"
+  ]
+}
