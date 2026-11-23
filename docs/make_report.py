@@ -54,7 +54,7 @@ def draw_flowchart():
 
 def add_field(paragraph, instr):
     run = paragraph.add_run()
-    for kind, text in (("begin", None), (None, instr), ("separate", None), (None, "Right-click and choose Update Field to build the table of contents."), ("end", None)):
+    for kind, text in (("begin", None), (None, instr), ("separate", None), (None, "Table of contents: if it is empty, press Yes when Word asks to update fields, or right-click here and choose Update Field."), ("end", None)):
         if kind:
             el = OxmlElement("w:fldChar"); el.set(qn("w:fldCharType"), kind)
         elif text == instr:
@@ -281,5 +281,8 @@ bullets([
     "Page, L. C. & Gehlbach, H. (2017). How an Artificially Intelligent Virtual Assistant Helps Students Navigate the Road to College. AERA Open.",
 ])
 
+settings = doc.settings.element
+update = OxmlElement("w:updateFields"); update.set(qn("w:val"), "true")
+settings.append(update)
 doc.save(OUT)
 print("saved", OUT)
