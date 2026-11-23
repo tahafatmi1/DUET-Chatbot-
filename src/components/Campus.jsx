@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { Library, FlaskConical, Mic2, Bus, Home } from 'lucide-react';
-import { campusPhotos } from '../campusPhotos.js';
+import { galleryPhotos } from '../campusPhotos.js';
 
 const facilities = [
   [Library, 'Libraries', 'Reading rooms and study space.'],
@@ -24,7 +24,7 @@ function Photo({ photo, className = '' }) {
 }
 
 export default function Campus() {
-  const [main, ...rest] = campusPhotos;
+  const [main, ...rest] = galleryPhotos;
   return (
     <section id="campus" className="mx-auto max-w-6xl scroll-mt-20 px-5 py-24">
       <p className="text-sm font-semibold tracking-widest text-brand">CAMPUS LIFE</p>
@@ -32,21 +32,23 @@ export default function Campus() {
       <p className="mt-3 max-w-2xl text-muted">A public-sector engineering university in the heart of Karachi, growing from a college founded in 1962.</p>
 
       <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-[1.3fr_1fr]">
-        <Photo photo={main} className="min-h-[22rem] lg:min-h-[30rem]" />
-        <div className="flex min-w-0 flex-col gap-6">
+        <div className="flex min-w-0 flex-col gap-4">
+          <Photo photo={main} className="aspect-[16/10]" />
           {rest.length > 0 && (
-            <div className="grid grid-cols-2 gap-4">{rest.map((p) => <Photo key={p.src} photo={p} className="aspect-[4/3]" />)}</div>
+            <div className="grid grid-cols-2 gap-4">
+              {rest.map((p) => <Photo key={p.src} photo={p} className="aspect-[4/3]" />)}
+            </div>
           )}
-          <ul className="grid gap-3">
-            {facilities.map(([Icon, title, text], i) => (
-              <motion.li key={title} initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}
-                className="flex items-center gap-4 rounded-2xl border border-line bg-surface p-4">
-                <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-brand-soft text-brand"><Icon size={20} /></span>
-                <div><div className="font-semibold">{title}</div><div className="text-sm text-muted">{text}</div></div>
-              </motion.li>
-            ))}
-          </ul>
         </div>
+        <ul className="grid min-w-0 content-start gap-3">
+          {facilities.map(([Icon, title, text], i) => (
+            <motion.li key={title} initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}
+              className="flex items-center gap-4 rounded-2xl border border-line bg-surface p-4">
+              <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-brand-soft text-brand"><Icon size={20} /></span>
+              <div><div className="font-semibold">{title}</div><div className="text-sm text-muted">{text}</div></div>
+            </motion.li>
+          ))}
+        </ul>
       </div>
     </section>
   );

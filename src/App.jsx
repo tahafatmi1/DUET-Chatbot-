@@ -6,6 +6,7 @@ import Process from './components/Process.jsx';
 import Campus from './components/Campus.jsx';
 import CpnEstimator from './components/CpnEstimator.jsx';
 import Faq from './components/Faq.jsx';
+import CtaBand from './components/CtaBand.jsx';
 import Footer from './components/Footer.jsx';
 import FloatingAsk from './components/FloatingAsk.jsx';
 
@@ -21,6 +22,7 @@ export default function App() {
         <Campus />
         <CpnEstimator />
         <Faq />
+        <CtaBand />
       </main>
       <Footer />
       <FloatingAsk />
