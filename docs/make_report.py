@@ -187,7 +187,7 @@ bullets([
     "Retrieval: tokenise the question, drop stop-words, score entries by keyword matches (longer keywords weigh more) and return the top matches.",
     "Priority: answer from our own knowledge base when the match is confident; otherwise, if a key is configured, send the retrieved entries and strict rules to Gemini as the system prompt; use the fallback if the call fails.",
     "Safety: block requests containing passwords, OTPs or card details; never invent dates or fees.",
-    "Interface design: mobile-first dark navy and gold theme, accessible chat log, quick-question chips, a futuristic CPN Estimator (animated gauge, sliders, scanning grid) and reduced-motion support.",
+    "Interface design (UI/UX revamp): warm ivory, navy and saffron colour scheme taken from the campus sunset photo, automatic dark mode, photo hero with the chat above the fold, sticky navigation with scroll-progress bar and mobile menu, key-fact cards, filterable program cards that send a question to the chatbot, animated admission timeline, campus section, FAQ accordion, floating Ask AI button, source labels on answers, a futuristic CPN Estimator, skip link, keyboard and screen-reader support, and reduced-motion support.",
     "Hardening and deployment: helmet security headers, rate limit, JSON error handling, no cross-origin access, deployment on Render.",
     "Testing and iteration: unit tests, API tests with curl and manual browser tests.",
 ])
@@ -200,7 +200,7 @@ para("Figure 1: Request flow of the DUET Admission Assistant", align=WD_ALIGN_PA
 # ---- 5 Implementation and Testing ----
 doc.add_heading("5. Implementation and Testing", 1)
 doc.add_heading("Chatbot Implementation", 2)
-para("The project has two parts. The server folder holds engine.js (tokeniser, retriever, safety rules, prompt builder), knowledge.json (admission topics and quick questions) and index.js (Express routes). The src folder holds the React application with components Hero, ChatWindow, Programs, Process, CpnEstimator and Footer. The chat component keeps the conversation in state, posts the last messages to /api/chat, shows an animated typing indicator while waiting and auto-scrolls to the newest reply. The production build is served by Express, so one command (npm start) runs the whole system.")
+para("The project has two parts. The server folder holds engine.js (tokeniser, retriever, safety rules, prompt builder), knowledge.json (admission topics and quick questions) and index.js (Express routes). The src folder holds the React application with components Navbar, Hero, ChatWindow, Facts, Programs, Process, Campus, CpnEstimator, Faq, Footer and FloatingAsk. Campus photos are configured in one file (campusPhotos.js), and any section can ask the chatbot a question through a small helper (ask.js) that scrolls to the chat and sends the question. The chat component keeps the conversation in state, posts the last messages to /api/chat, shows an animated typing indicator while waiting and auto-scrolls to the newest reply. The production build is served by Express, so one command (npm start) runs the whole system.")
 para("Live deployment: https://duet-chatbot.onrender.com  |  Source code: https://github.com/tahafatmi1/DUET-Chatbot-")
 table([
     ["GET /api/health", "Reports service status and mode (knowledge-base, or knowledge-base + gemini)"],
@@ -212,7 +212,7 @@ para("Security measures: helmet security headers (including a content-security p
 doc.add_heading("AI Model/API Integration", 2)
 para("Our own answers have priority. The server first handles greetings and safety rules, then answers from the knowledge base whenever the keyword match is confident (score of at least 2; comparison questions such as DUET versus another university are never answered from a single entry). Only when no confident match exists and an API key is configured does it call a language model. Google Gemini is the primary provider (GEMINI_API_KEY, model set by GEMINI_MODEL, default gemini-3.5-flash-lite) and is called through the Generative Language REST API with a system instruction, the conversation turns and a 20-second timeout. Groq, xAI Grok and Anthropic Claude are supported as alternatives in that order of priority. The system prompt contains the university name, strict behavioural rules and the retrieved knowledge entries, and tells the model to use only that knowledge and never invent dates or fees. If the call fails or no key exists, the bot returns the best weak match or a polite fallback that points to the admissions office. During testing, the originally configured model gemini-2.5-flash returned HTTP 404 (no longer available to new keys); listing the available models and switching to gemini-3.5-flash-lite fixed it, which is why the model name is configurable. Keys are read from environment variables and never reach the browser.")
 doc.add_heading("Screenshots", 2)
-for img, cap in (("shot-home.jpg", "Figure 2: Landing page with animated hero and key admission facts"), ("shot-chat.jpg", "Figure 3: Chat window answering 'How do I apply?'"), ("shot-cpn.jpg", "Figure 4: Futuristic CPN Estimator with animated gauge and eligibility check")):
+for img, cap in (("shot-home.jpg", "Figure 2: Landing page with campus-photo hero, sticky navigation and live chat"), ("shot-chat.jpg", "Figure 3: Chat answering 'How do I apply?' with a source label (knowledge base or AI)"), ("shot-programs.jpg", "Figure 4: Programs section with degree filter tabs and Ask about this buttons"), ("shot-campus.jpg", "Figure 5: Campus section with parallax photo and facilities"), ("shot-cpn.jpg", "Figure 6: Futuristic CPN Estimator with animated gauge and eligibility check")):
     doc.add_picture(os.path.join(HERE, img), width=Inches(5.2))
     doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
     para(cap, align=WD_ALIGN_PARAGRAPH.CENTER)
@@ -237,11 +237,13 @@ table([
     ["T16", "21 requests to /api/chat within a minute", "First 20 succeed, then HTTP 429", "Pass"],
     ["T17", "Response headers", "helmet headers present, X-Powered-By removed, no CORS header", "Pass"],
     ["T18", "Request /.env and /server/index.js on the live site", "Only the web page is returned, no source or secrets", "Pass"],
-    ["T19", "Browser: tap quick chip (375 px mobile)", "Typing indicator then answer; no horizontal scroll; no console errors", "Pass"],
+    ["T19", "Browser: tap quick chip (375 px mobile) and open the mobile menu", "Typing indicator then answer; no horizontal scroll; no console errors", "Pass"],
     ["T20", "CPN Estimator: 80 / 75 / 70", "Gauge shows 72.50", "Pass"],
     ["T21", "CPN Estimator: 2nd-year Intermediate 55%, BE then BS", "BE: 5% short of 60%; BS: meets 50%", "Pass"],
     ["T22", "Production build (vite build) and npm audit", "Builds without errors; 0 vulnerabilities", "Pass"],
-    ["T23", "Deployed site https://duet-chatbot.onrender.com (first release)", "Health, config and chat endpoints respond; UI loads", "Pass"],
+    ["T23", "Program card: Ask about this (Chemical Engineering)", "Question sent to chat; eligibility answer with 60% rule; source label shown", "Pass"],
+    ["T24", "Dark mode (OS preference) and 375 px layout", "Tokens switch to dark theme; no horizontal overflow; hero and chat readable", "Pass"],
+    ["T25", "Deployed site https://duet-chatbot.onrender.com (first release)", "Health, config and chat endpoints respond; UI loads", "Pass"],
 ], ["ID", "Input / action", "Expected result", "Status"])
 para("Defects found and fixed during testing: (1) a program-change question returned the program list, fixed with a dedicated knowledge topic; (2) the generic word DUET in the About entry caused false confident matches, fixed by removing generic keywords and handling plural words; (3) malformed requests returned an HTML error page, fixed with a JSON error handler; (4) the chat endpoint had no rate limit, fixed with express-rate-limit; (5) the Gemini model gemini-2.5-flash returned 404, fixed by switching to gemini-3.5-flash-lite.")
 para("Limitations: the keyword retriever depends on the keywords in the knowledge base, so unusual phrasing can reach the fallback or a nearby topic. Fees, dates, quotas and merit trends come partly from third-party guides that sometimes disagree, so they are shown as reported figures and must be verified on the official portal. The CPN weights are from published guides and are indicative. The free Render plan sleeps when idle, so the first reply can be slow, and Gemini free-tier limits apply.")

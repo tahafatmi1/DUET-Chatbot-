@@ -1,5 +1,53 @@
 @import "tailwindcss";
 
+/* Page tokens (light by default, dark when the OS prefers it). */
+:root {
+  --canvas: #fbf8f3;
+  --surface: #ffffff;
+  --surface-2: #f3eee6;
+  --ink: #0e1b3d;
+  --muted: #586179;
+  --line: #e6dfd3;
+  --brand: #f28c28;
+  --brand-soft: #fde9d2;
+  --ok: #14735a;
+  --ok-soft: #dff3ec;
+  --bad: #b4233a;
+  --bad-soft: #fbe3e7;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --canvas: #0a1226;
+    --surface: #121c38;
+    --surface-2: #1a2750;
+    --ink: #eef2fb;
+    --muted: #a4aec6;
+    --line: #26325a;
+    --brand: #f5a04a;
+    --brand-soft: #3a2a17;
+    --ok: #4cc9a0;
+    --ok-soft: #123a31;
+    --bad: #ff8a9c;
+    --bad-soft: #3d1a24;
+  }
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-bad: var(--bad);
+  --color-bad-soft: var(--bad-soft);
+}
+
+/* Fixed colours used by the dark CPN section and the photo hero. */
 @theme {
   --color-navy-950: #070d1f;
   --color-navy-900: #0b1630;
@@ -12,11 +60,13 @@
 }
 
 html { scroll-behavior: smooth; }
-body { background: var(--color-navy-950); color: #e6ebf7; font-family: var(--font-sans); }
+html, body { overflow-x: clip; }
+body { background: var(--canvas); color: var(--ink); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+:focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
 
-.glass { background: rgb(255 255 255 / 0.05); border: 1px solid rgb(255 255 255 / 0.1); backdrop-filter: blur(14px); }
-.aurora { background:
-  radial-gradient(60rem 30rem at 15% -10%, rgb(242 193 78 / 0.16), transparent 60%),
-  radial-gradient(50rem 30rem at 90% 10%, rgb(60 100 220 / 0.28), transparent 60%); }
+.glass-dark { background: rgb(255 255 255 / 0.06); border: 1px solid rgb(255 255 255 / 0.12); backdrop-filter: blur(14px); }
 
-@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
