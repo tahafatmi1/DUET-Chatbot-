@@ -97,7 +97,7 @@ export default function CpnEstimator() {
 
   return (
     <section id="cpn" className="mx-auto max-w-6xl px-5 py-20">
-      <div className="relative overflow-hidden rounded-3xl border border-cyan-300/20 bg-navy-900/80 p-6 shadow-[0_0_80px_-20px_rgb(103_232_249/0.35)] md:p-10">
+      <div className="relative overflow-hidden rounded-3xl border border-cyan-300/20 bg-navy-950 p-6 text-white shadow-[0_0_80px_-20px_rgb(103_232_249/0.35)] md:p-10">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 opacity-30"
